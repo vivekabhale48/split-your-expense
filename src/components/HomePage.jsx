@@ -1,0 +1,70 @@
+import { useState } from 'react';
+
+export const HomePage = () => {
+  const [groupSize, setGroupSize] = useState(3);
+  const [tripName, setTripName] = useState('');
+
+  function handleSubmit() {
+    
+  }
+
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="bg-[#D4F5F5] shadow-lg rounded-lg p-6 max-w-sm w-full">
+        <h1 className="text-center text-lg font-bold text-licorice mb-4">
+          Start New Calculation
+        </h1>
+        <div className="mb-4">
+          <label
+            className="text-center block text-gray-700 text-sm font-medium mb-2"
+            htmlFor="group-size"
+          >
+            How many people are in your group?
+          </label>
+          <div className="flex items-center justify-center space-x-3">
+            <button
+              onClick={() => setGroupSize((prev) => (prev > 2 ? prev - 1 : 2))}
+              className="bg-[#93B7BE] text-black font-bold w-7 h-7 flex justify-center items-center rounded-full hover:bg-[#3B6F78] transition"
+            >
+              -
+            </button>
+            <input
+              value={groupSize}
+              onChange={(e) => setGroupSize(e.target.value)}
+              type="number"
+              className="text-lg font-bold w-[45px] text-center outline-none border rounded-md focus:outline-none focus:ring-2 focus:ring-light-blue"
+            />
+            <button
+              onClick={() => setGroupSize((prev) => prev + 1)}
+              className="bg-[#93B7BE] text-black font-bold w-7 h-7 flex justify-center items-center rounded-full hover:bg-[#3B6F78] transition"
+            >
+              +
+            </button>
+          </div>
+          <p className="text-sm text-gray-500 mt-1">
+            People can be excluded from single expenses later
+          </p>
+        </div>
+        <div className="mb-6">
+          <label
+            className="block text-gray-700 text-sm font-medium mb-2"
+            htmlFor="name"
+          >
+            Give it a name!
+          </label>
+          <input
+            type="text"
+            id="name"
+            placeholder="e.g. Roadtrip"
+            value={tripName}
+            onChange={(e) => setTripName(e.target.value)}
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-light-blue"
+          />
+        </div>
+        <button className="bg-green-500 text-white w-full py-2 rounded-md font-bold hover:bg-green-600 transition">
+          Go!
+        </button>
+      </div>
+    </div>
+  );
+};
