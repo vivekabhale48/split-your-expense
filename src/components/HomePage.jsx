@@ -1,10 +1,21 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addTheMembers } from '../store/slice/HomeSlice';
+import { useNavigate } from 'react-router-dom';
 
 export const HomePage = () => {
   const [groupSize, setGroupSize] = useState(3);
   const [tripName, setTripName] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function handleSubmit() {
+    const tripDetails = {
+      'groupName': tripName,
+      'totalMembers': groupSize
+    }
+    dispatch(addTheMembers(tripDetails));
+    navigate('/bill-page-section');
     
   }
 
@@ -61,7 +72,7 @@ export const HomePage = () => {
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-light-blue"
           />
         </div>
-        <button className="bg-green-500 text-white w-full py-2 rounded-md font-bold hover:bg-green-600 transition">
+        <button onClick={handleSubmit} className="bg-green-500 text-white w-full py-2 rounded-md font-bold hover:bg-green-600 transition">
           Go!
         </button>
       </div>
