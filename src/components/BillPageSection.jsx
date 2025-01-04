@@ -11,12 +11,11 @@ export const BillPageSection = () => {
             <h1 className="text-white text-[48px] text-center">Welcome to trip {data.groupDetails.groupName}</h1>
 
             <div>
-                {Array.from({length: data.groupDetails.totalMembers}, (_) => {
-                    
-                    return(
-                        <ParticularBillSection  />
-                    )
-                })}
+                {
+                    data.members.map((memberDetail) => (
+                        <ParticularBillSection memberDetail={memberDetail} />
+                    ))
+                }
             </div>
         </div>
     )

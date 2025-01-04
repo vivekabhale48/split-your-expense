@@ -16,7 +16,7 @@ export const HomePage = () => {
     }
     dispatch(addTheMembers(tripDetails));
     navigate('/bill-page-section');
-    
+
   }
 
   return (

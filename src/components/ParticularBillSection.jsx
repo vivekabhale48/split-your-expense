@@ -1,7 +1,16 @@
 import React from "react";
 import { FaUser, FaTag, FaMinus, FaPlus, FaUsers } from "react-icons/fa";
+import { EachExpenseSection } from "./EachExpenseSection";
+import { useDispatch } from "react-redux";
+import { addNewExpense } from "../store/slice/HomeSlice";
 
-export const ParticularBillSection = () => {
+export const ParticularBillSection = ({memberDetail}) => {
+
+    const dispatch = useDispatch();
+
+    function handleNewExpense(id) {
+        dispatch(addNewExpense(id))
+    }
 
     return (
         <div className="flex items-center justify-center px-4 mt-10 mb-10">
@@ -32,7 +41,7 @@ export const ParticularBillSection = () => {
                         <input
                             id="amount"
                             type="number"
-                            value="0"
+                            value={memberDetail.totalExpense}
                             readOnly
                             className="w-full bg-gray-100 border border-gray-300 rounded-md px-4 py-2 text-gray-700 text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
                         />
@@ -40,46 +49,15 @@ export const ParticularBillSection = () => {
                 </div>
 
                 {/* Input Fields */}
-                    <div className="grid grid-cols-3 gap-3 mb-6 items-end">
-                        <div>
-                            <label
-                                htmlFor="what"
-                                className="block text-gray-700 font-semibold mb-2"
-                            >
-                                What?
-                            </label>
-                            <input
-                                id="what"
-                                type="text"
-                                placeholder="Expense name"
-                                className="w-full bg-gray-100 border border-gray-300 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            />
-                        </div>
-                        <div>
-                            <label
-                                htmlFor="how-much"
-                                className="block text-gray-700 font-semibold mb-2"
-                            >
-                                How much
-                            </label>
-                            <input
-                                id="how-much"
-                                type="number"
-                                placeholder="Amount"
-                                className="w-full bg-gray-100 border border-gray-300 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            />
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <button
-                                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
-                            >
-                                Remove
-                            </button>
-                        </div>
-                    </div>
+
+                {
+                    memberDetail.expenses.map((particularExpense) => (
+                        <EachExpenseSection memberId={memberDetail.id} particularExpense={particularExpense} numOfExpenses={memberDetail.expenses.length}/>
+                    ))
+                }
 
                 {/* More Button */}
-                <button className="w-full bg-blue-500 text-white py-3 rounded-md font-bold hover:bg-blue-600 transition">
+                <button onClick={() => handleNewExpense(memberDetail.id)} className="w-full bg-blue-500 text-white py-3 rounded-md font-bold hover:bg-blue-600 transition cursor-pointer">
                     Add More
                 </button>
             </div>
