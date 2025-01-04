@@ -8,12 +8,12 @@ export const BillPageSection = () => {
 
     return (
         <div className="text-white">
-            <h1 className="text-white text-[48px] text-center">Welcome to trip {data.groupDetails.groupName}</h1>
+            <h1 className="text-white text-[48px] text-center">Welcome to trip {data.groupDetails?.groupName}</h1>
 
             <div>
                 {
-                    data.members.map((memberDetail) => (
-                        <ParticularBillSection memberDetail={memberDetail} />
+                    data?.members?.map((memberDetail, index) => (
+                        <ParticularBillSection key={index} memberDetail={memberDetail} />
                     ))
                 }
             </div>

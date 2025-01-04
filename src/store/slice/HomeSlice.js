@@ -23,6 +23,12 @@ const HomeSlice = createSlice({
                 totalExpense: 0
             }))
         },
+        updateMemberName: (state, action) => {
+            const {memberId, memberName} = action.payload;
+            if(state.data.members?.[memberId]) {
+                state.data.members[memberId].name = memberName;
+            }  
+        },
         addNewExpense: (state, action) => {
             const id = action.payload;
             state.data.members[id].expenses.push({
@@ -32,11 +38,22 @@ const HomeSlice = createSlice({
             })
         },
         editDescriptionOfExpense: (state, action) => {
-            console.log(action.payload);
             const {memberId ,expenseId, description} = action.payload;
-            console.log(description)
             if (state.data.members?.[memberId]?.expenses?.[expenseId]) {
                 state.data.members[memberId].expenses[expenseId].description = description;
+            } else {
+                console.error("Invalid memberId or expenseId", action.payload);
+            }
+        },
+        editParticularExpenseAmount: (state, action) => {
+            const {memberId ,expenseId, pexpenseAmount} = action.payload;
+            if(state.data.members?.[memberId]?.expenses?.[expenseId]) {
+                state.data.members[memberId].expenses[expenseId].amount = pexpenseAmount;
+                let value = state.data.members[memberId].expenses.reduce((acc, expense) => {
+                    acc += expense?.amount;
+                    return acc;
+                }, 0)
+                state.data.members[memberId].totalExpense = +value;
             } else {
                 console.error("Invalid memberId or expenseId", action.payload);
             }
@@ -44,5 +61,5 @@ const HomeSlice = createSlice({
     }
 })
 
-export const {addTheMembers, addNewExpense, editDescriptionOfExpense} = HomeSlice.actions;
+export const {addTheMembers, addNewExpense, editDescriptionOfExpense, editParticularExpenseAmount, updateMemberName} = HomeSlice.actions;
 export const HomeSliceReducers = HomeSlice.reducer;

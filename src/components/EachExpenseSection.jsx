@@ -1,11 +1,12 @@
 import { useDispatch } from "react-redux"
-import { editDescriptionOfExpense } from "../store/slice/HomeSlice";
+import { editDescriptionOfExpense, editParticularExpenseAmount } from "../store/slice/HomeSlice";
 import { useState } from "react";
 
 export const EachExpenseSection = ({particularExpense, numOfExpenses, memberId}) => {
 
     const dispatch = useDispatch();
     const [expenseDescription, setExpenseDescription] = useState('');
+    const [particularExpenseAmount, setParticularExpenseAmount] = useState(0);
 
     function handleDescriptionChange(event) {
         setExpenseDescription(event.target.value);
@@ -15,6 +16,16 @@ export const EachExpenseSection = ({particularExpense, numOfExpenses, memberId})
             description: event.target.value
         }
         dispatch(editDescriptionOfExpense(data));
+    }
+
+    const handleExpenseAmountChange = (event) => {
+        setParticularExpenseAmount(event.target.value);
+        let data = {
+            memberId,
+            expenseId: particularExpense.id,
+            pexpenseAmount: +event.target.value || 0
+        }
+        dispatch(editParticularExpenseAmount(data))
     }
 
 
@@ -47,6 +58,8 @@ export const EachExpenseSection = ({particularExpense, numOfExpenses, memberId})
                     id="how-much"
                     type="number"
                     placeholder="Amount"
+                    value={particularExpenseAmount}
+                    onChange={handleExpenseAmountChange}
                     className="w-full bg-gray-100 border border-gray-300 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
             </div>

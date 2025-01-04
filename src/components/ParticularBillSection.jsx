@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaUser, FaTag, FaMinus, FaPlus, FaUsers } from "react-icons/fa";
 import { EachExpenseSection } from "./EachExpenseSection";
 import { useDispatch } from "react-redux";
-import { addNewExpense } from "../store/slice/HomeSlice";
+import { addNewExpense, updateMemberName } from "../store/slice/HomeSlice";
 
 export const ParticularBillSection = ({memberDetail}) => {
 
     const dispatch = useDispatch();
+    const [memberName, setMemberName] = useState('');
 
     function handleNewExpense(id) {
         dispatch(addNewExpense(id))
+    }
+
+    const handleMemberName = (event) => {
+        setMemberName(event.target.value);
+        let data = {
+            memberId: memberDetail.id,
+            memberName: event.target.value
+        }
+        dispatch(updateMemberName(data));
     }
 
     return (
@@ -22,12 +32,14 @@ export const ParticularBillSection = ({memberDetail}) => {
                             htmlFor="name"
                             className="block text-gray-700 font-semibold mb-2"
                         >
-                            Name
+                            Member {memberDetail.id+1}
                         </label>
                         <input
                             id="name"
                             type="text"
                             placeholder="Enter name"
+                            value={memberName}
+                            onChange={handleMemberName}
                             className="w-full bg-gray-100 border border-gray-300 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
                         />
                     </div>
@@ -43,7 +55,7 @@ export const ParticularBillSection = ({memberDetail}) => {
                             type="number"
                             value={memberDetail.totalExpense}
                             readOnly
-                            className="w-full bg-gray-100 border border-gray-300 rounded-md px-4 py-2 text-gray-700 text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className="w-full cursor-not-allowed font-bold bg-gray-100 border border-gray-300 rounded-md px-4 py-2 text-gray-700 text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
                         />
                     </div>
                 </div>
@@ -51,8 +63,8 @@ export const ParticularBillSection = ({memberDetail}) => {
                 {/* Input Fields */}
 
                 {
-                    memberDetail.expenses.map((particularExpense) => (
-                        <EachExpenseSection memberId={memberDetail.id} particularExpense={particularExpense} numOfExpenses={memberDetail.expenses.length}/>
+                    memberDetail.expenses.map((particularExpense, index) => (
+                        <EachExpenseSection key={index} memberId={memberDetail.id} particularExpense={particularExpense} numOfExpenses={memberDetail.expenses.length}/>
                     ))
                 }
 
