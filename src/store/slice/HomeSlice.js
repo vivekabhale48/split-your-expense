@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
     data: {},
@@ -15,7 +16,7 @@ const HomeSlice = createSlice({
                 name: '',
                 expenses: [
                     {
-                        id: 0,
+                        id: uuidv4(),
                         description: '',
                         amount: 0
                     }
@@ -32,31 +33,51 @@ const HomeSlice = createSlice({
         addNewExpense: (state, action) => {
             const id = action.payload;
             state.data.members[id].expenses.push({
-                id: state.data.members[id].expenses.length,
+                id: uuidv4(),
                 description: '',
                 amount: 0
             })
         },
         editDescriptionOfExpense: (state, action) => {
             const {memberId ,expenseId, description} = action.payload;
-            if (state.data.members?.[memberId]?.expenses?.[expenseId]) {
-                state.data.members[memberId].expenses[expenseId].description = description;
-            } else {
-                console.error("Invalid memberId or expenseId", action.payload);
+            const expenseArray = state.data.members?.[memberId].expenses;
+            if(expenseArray) {
+                //finding the expense using expenseId
+                const expense = expenseArray.find((exp) => exp.id === expenseId);
+                if (expense) {
+                    expense.description = description;
+                } else {
+                    console.error("Expense not found with the given ID:", expenseId);
+                }
+            }
+            else {
+                console.error("Invalid memberId or member not found", memberId);
             }
         },
         editParticularExpenseAmount: (state, action) => {
-            const {memberId ,expenseId, pexpenseAmount} = action.payload;
-            if(state.data.members?.[memberId]?.expenses?.[expenseId]) {
-                state.data.members[memberId].expenses[expenseId].amount = pexpenseAmount;
-                let value = state.data.members[memberId].expenses.reduce((acc, expense) => {
-                    acc += expense?.amount;
-                    return acc;
-                }, 0)
-                state.data.members[memberId].totalExpense = +value;
-            } else {
+            const {memberId, expenseId, pexpenseAmount} = action.payload;
+            const expenseArray = state.data.members?.[memberId].expenses;
+
+            if(expenseArray) {
+                const expense = expenseArray.find((exp) => exp.id === expenseId);
+                if (expense) {
+                    expense.amount = pexpenseAmount;
+                    let value = expenseArray.reduce((acc, expense) => {
+                        acc += expense?.amount;
+                        return acc;
+                    }, 0)
+                    state.data.members[memberId].totalExpense = +value;
+                } else {
+                    console.error("Expense not found with the given ID:", expenseId);
+                }
+            }
+            else {
                 console.error("Invalid memberId or expenseId", action.payload);
             }
+        },
+        deleteExpense: (state, action) => {
+            const {expenseId, memberId} = action.payload;
+            state.data.members[memberId].expenses = state.data.members[memberId].expenses.filter((exp) => exp.id !== expenseId);
         }
     }
 })
