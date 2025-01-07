@@ -82,5 +82,5 @@ const HomeSlice = createSlice({
     }
 })
 
-export const {addTheMembers, addNewExpense, editDescriptionOfExpense, editParticularExpenseAmount, updateMemberName} = HomeSlice.actions;
+export const {addTheMembers, addNewExpense, editDescriptionOfExpense, editParticularExpenseAmount, updateMemberName, deleteExpense} = HomeSlice.actions;
 export const HomeSliceReducers = HomeSlice.reducer;

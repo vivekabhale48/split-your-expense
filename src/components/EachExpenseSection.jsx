@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { editDescriptionOfExpense, editParticularExpenseAmount } from "../store/slice/HomeSlice";
+import { editDescriptionOfExpense, editParticularExpenseAmount, deleteExpense } from "../store/slice/HomeSlice";
 import { useState } from "react";
 
 export const EachExpenseSection = ({particularExpense, numOfExpenses, memberId}) => {
@@ -28,11 +28,12 @@ export const EachExpenseSection = ({particularExpense, numOfExpenses, memberId})
         dispatch(editParticularExpenseAmount(data))
     }
 
-    const deleteExpense = (event) => {
+    const handleDeleteExpense = (event) => {
         let data = {
             memberId,
-
+            expenseId: particularExpense.id,
         }
+        dispatch(deleteExpense(data));
     }
 
     return (
@@ -73,7 +74,7 @@ export const EachExpenseSection = ({particularExpense, numOfExpenses, memberId})
                 <button
                     className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition disabled:opacity-65"
                     disabled={numOfExpenses > 1 ? false : true}
-                    onClick={() => deleteExpense()}
+                    onClick={handleDeleteExpense}
                 >
                     Remove
                 </button>
