@@ -1,12 +1,15 @@
 import { useDispatch } from "react-redux"
 import { editDescriptionOfExpense, editParticularExpenseAmount, deleteExpense } from "../store/slice/HomeSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const EachExpenseSection = ({particularExpense, numOfExpenses, memberId}) => {
 
     const dispatch = useDispatch();
     const [expenseDescription, setExpenseDescription] = useState('');
     const [particularExpenseAmount, setParticularExpenseAmount] = useState(0);
+    const [dataDeleted, setDataDeleted] = useState(false);
+
+    useEffect(() => {}, [dataDeleted])
 
     function handleDescriptionChange(event) {
         setExpenseDescription(event.target.value);
@@ -34,6 +37,8 @@ export const EachExpenseSection = ({particularExpense, numOfExpenses, memberId})
             expenseId: particularExpense.id,
         }
         dispatch(deleteExpense(data));
+        setDataDeleted((prev) => !prev)
+        // setExpenseDescription(particularExpense.description);
     }
 
     return (
@@ -48,7 +53,7 @@ export const EachExpenseSection = ({particularExpense, numOfExpenses, memberId})
                 <input
                     id="what"
                     type="text"
-                    value={expenseDescription}
+                    value={particularExpense.description}
                     onChange={handleDescriptionChange}
                     placeholder="Expense name"
                     className="w-full bg-gray-100 border border-gray-300 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
