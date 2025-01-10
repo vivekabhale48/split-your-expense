@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { editDescriptionOfExpense, editParticularExpenseAmount, deleteExpense } from "../store/slice/HomeSlice";
+import { editDescriptionOfExpense, editParticularExpenseAmount, deleteExpense, allMembersTotalExpense, netBalanceParticularMember } from "../store/slice/HomeSlice";
 import { useEffect, useState } from "react";
 
 export const EachExpenseSection = ({particularExpense, numOfExpenses, memberId}) => {
@@ -29,6 +29,8 @@ export const EachExpenseSection = ({particularExpense, numOfExpenses, memberId})
             pexpenseAmount: +event.target.value || 0
         }
         dispatch(editParticularExpenseAmount(data))
+        dispatch(allMembersTotalExpense());
+        dispatch(netBalanceParticularMember());
     }
 
     const handleDeleteExpense = (event) => {

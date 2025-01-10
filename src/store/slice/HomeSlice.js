@@ -24,6 +24,19 @@ const HomeSlice = createSlice({
                 totalExpense: 0
             }))
         },
+        allMembersTotalExpense: (state, action) => {
+            let val = state.data.members.reduce((acc, member) => {
+                acc = acc + member?.totalExpense
+                return acc;
+            }, 0)
+            state.data.groupDetails.allMembersTotalExpense = val;
+            state.data.groupDetails.sharePerPerson = state.data.groupDetails.allMembersTotalExpense / state.data.groupDetails.totalMembers   
+        },
+        netBalanceParticularMember: (state, action) => {
+            state.data.members.forEach(member => {
+                member['netBalance'] = member.totalExpense - state.data.groupDetails.sharePerPerson
+            });
+        },
         updateMemberName: (state, action) => {
             const {memberId, memberName} = action.payload;
             if(state.data.members?.[memberId]) {
@@ -82,5 +95,5 @@ const HomeSlice = createSlice({
     }
 })
 
-export const {addTheMembers, addNewExpense, editDescriptionOfExpense, editParticularExpenseAmount, updateMemberName, deleteExpense} = HomeSlice.actions;
+export const {addTheMembers, addNewExpense, editDescriptionOfExpense, editParticularExpenseAmount, updateMemberName, deleteExpense, allMembersTotalExpense, netBalanceParticularMember} = HomeSlice.actions;
 export const HomeSliceReducers = HomeSlice.reducer;

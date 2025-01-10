@@ -12,7 +12,9 @@ export const HomePage = () => {
   function handleSubmit() {
     const tripDetails = {
       'groupName': tripName,
-      'totalMembers': groupSize
+      'totalMembers': groupSize,
+      'allMembersTotalExpense': 0,
+      'sharePerPerson': 0 
     }
     dispatch(addTheMembers(tripDetails));
     navigate('/bill-page-section');
