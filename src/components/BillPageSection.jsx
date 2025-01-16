@@ -7,17 +7,52 @@ export const BillPageSection = () => {
     const data = useSelector((state) => state.homePageContent.data);
     const [creditors, setCreditors] = useState([])
     const [debitors, setDebitors] = useState([])
+    const [settlements, setSettlements] = useState([]);
 
     const calculateTheExpense = () => {
+        const tempCreditors = [];
+        const tempDebitors = [];
         data?.members.forEach((member) => {
-            if(member?.netBalance > 0) {
-                setCreditors((prev) => [...prev, member])
+            if (member?.netBalance > 0) {
+                tempCreditors.push({ ...member })
             }
-            else {
-                setDebitors((prev) => [...prev, member])
+            else if (member?.netBalance < 0) {
+                tempDebitors.push({ ...member });
             }
         })
-        
+
+        tempCreditors.sort((a, b) => b.netBalance - a.netBalance);
+        tempDebitors.sort((a, b) => a.netBalance - b.netBalance);
+        setCreditors(tempCreditors);
+        setDebitors(tempDebitors);
+
+        const tempSettlements = [];
+        let i = 0, j = 0;
+
+        while (i < tempCreditors.length && j < tempDebitors.length) {
+            const creditor = tempCreditors[i];
+            const debitor = tempDebitors[j];
+
+            const settlementAmount = Math.min(
+                creditor.netBalance,
+                Math.abs(debitor.netBalance)
+            );
+
+            tempSettlements.push({
+                from: debitor.name,
+                to: creditor.name,
+                amount: settlementAmount.toFixed(2),
+            });
+
+            // Update balances
+            creditor.netBalance -= settlementAmount;
+            debitor.netBalance += settlementAmount;
+
+            // Move to the next creditor or debitor if balance is settled
+            if (creditor.netBalance === 0) i++;
+            if (debitor.netBalance === 0) j++;
+        }
+        setSettlements(tempSettlements);
     }
 
     return (
