@@ -48,7 +48,7 @@ export const EachExpenseSection = ({particularExpense, numOfExpenses, memberId})
             <div>
                 <label
                     htmlFor="what"
-                    className="block text-gray-700 font-semibold mb-2"
+                    className="block font-semibold mb-2"
                 >
                     What?
                 </label>
@@ -64,7 +64,7 @@ export const EachExpenseSection = ({particularExpense, numOfExpenses, memberId})
             <div>
                 <label
                     htmlFor="how-much"
-                    className="block text-gray-700 font-semibold mb-2"
+                    className="block font-semibold mb-2"
                 >
                     How much
                 </label>
@@ -79,7 +79,7 @@ export const EachExpenseSection = ({particularExpense, numOfExpenses, memberId})
             </div>
             <div className="flex items-center justify-between">
                 <button
-                    className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition disabled:opacity-65"
+                    className={numOfExpenses > 1 ? 'bg-[#241FA4] text-white px-4 py-2 rounded-md hover:bg-[#48bcda] transition disabled:opacity-65' : 'bg-[#241FA4] text-white px-4 py-2 rounded-md transition disabled:opacity-65'}
                     disabled={numOfExpenses > 1 ? false : true}
                     onClick={handleDeleteExpense}
                 >

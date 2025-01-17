@@ -24,13 +24,13 @@ export const ParticularBillSection = ({memberDetail}) => {
 
     return (
         <div className="flex items-center justify-center px-4 mt-10 mb-10">
-            <div className="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full">
+            <div className="bg-gradient-to-r from-purple-600 via-blue-500 to-green-400 text-white w-full max-w-md px-6 py-4 rounded-lg shadow-lg">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6 gap-2">
                     <div className="w-2/3">
                         <label
                             htmlFor="name"
-                            className="block text-gray-700 font-semibold mb-2"
+                            className="block font-semibold mb-2"
                         >
                             Member {memberDetail.id+1}
                         </label>
@@ -46,7 +46,7 @@ export const ParticularBillSection = ({memberDetail}) => {
                     <div className="w-1/3 text-center">
                         <label
                             htmlFor="amount"
-                            className="block text-gray-700 font-semibold mb-2"
+                            className="block font-semibold mb-2"
                         >
                             Amount
                         </label>
@@ -69,7 +69,7 @@ export const ParticularBillSection = ({memberDetail}) => {
                 }
 
                 {/* More Button */}
-                <button onClick={() => handleNewExpense(memberDetail.id)} className="w-full bg-blue-500 text-white py-3 rounded-md font-bold hover:bg-blue-600 transition cursor-pointer">
+                <button onClick={() => handleNewExpense(memberDetail.id)} className="w-full bg-[#241FA4] hover:bg-[#48bcda] text-white py-3 rounded-md font-bold hover:bg-blue-600 transition cursor-pointer">
                     Add More
                 </button>
             </div>
