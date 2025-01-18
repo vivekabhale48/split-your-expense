@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const HowToUsePage = () => {
   return (
-    <div className="min-h-screen bg-[#080f1f] text-white p-6">
+    <div className="bg-[#080f1f] text-white p-6 mb-[50px]">
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
         <h1 className="text-3xl font-bold text-center mb-6">How to Use Our App</h1>
