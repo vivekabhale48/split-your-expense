@@ -17,7 +17,7 @@ export const Navbar = () => {
           {/* Add your symbol/logo here */}
           <div className="w-10 h-10 bg-gray-700 rounded-full flex justify-center items-center">
             {/* Placeholder for your logo */}
-            <img src="/public/AppSymbol.png" alt="Logo" />
+            <img src="public/AppSymbol.png" alt="Logo" />
           </div>
           <span className="text-xl font-semibold">SPLIT YOUR EXPENSE</span>
         </div>
