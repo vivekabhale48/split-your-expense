@@ -58,9 +58,6 @@ export const Navbar = () => {
           <Link to="/features" className="block hover:text-white">
             Features
           </Link>
-          <Link to="/pricing" className="block hover:text-white">
-            Pricing
-          </Link>
           <Link to="/about" className="block hover:text-white">
             About Us
           </Link>
