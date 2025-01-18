@@ -59,7 +59,7 @@ export const Footer = () => {
             <ul>
               <li className="mb-2">
                 <Link
-                  to="/how-to-use"
+                  to="/howtouse"
                   className="hover:underline hover:text-gray-300"
                 >
                   How to Use

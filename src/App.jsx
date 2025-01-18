@@ -9,6 +9,7 @@ import { Navbar } from './components/NavBarSection'
 import { Footer } from './components/FooterSection'
 import Features from './pages/Features'
 import AboutUs from './pages/AboutUs'
+import HowToUsePage from './pages/HowToUse'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/bill-page-section' element={<BillPageSection/>}/>
         <Route path='/features' element={<Features />}/>
         <Route path='/about' element={<AboutUs />}/>
+        <Route path='/howtouse' element={<HowToUsePage />}/>
       </Routes>
       {/* Footer Section */}
       <Footer />
