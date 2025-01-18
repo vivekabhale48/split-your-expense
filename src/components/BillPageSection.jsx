@@ -86,6 +86,15 @@ export const BillPageSection = () => {
                     <div className="text-center mt-10 px-4 mb-10">
                         <h2 className="text-3xl font-bold mb-6 text-white">💸 Settlements</h2>
                         <div className="flex flex-col items-center justify-center gap-4">
+                            {
+                             settlements.length !== 0 && (
+                                <div className="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white w-full max-w-md px-6 py-4 rounded-lg shadow-lg">
+                                    <p className="text-lg font-medium">
+                                        Total Share Per Person - ₹ {data?.groupDetails?.sharePerPerson}
+                                    </p>
+                                </div>
+                             )   
+                            }
                             {settlements.length === 0 ? (
                                 <p className="text-gray-400 text-lg">No settlements yet!</p>
                             ) : (
