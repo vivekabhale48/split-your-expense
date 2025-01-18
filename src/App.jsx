@@ -5,15 +5,25 @@ import './App.css'
 import { HomePage } from './components/HomePage'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { BillPageSection } from './components/BillPageSection'
+import { Navbar } from './components/NavBarSection'
+import { Footer } from './components/FooterSection'
+import Features from './pages/Features'
+import AboutUs from './pages/AboutUs'
 
 function App() {
 
   return (
     <BrowserRouter>
+      {/* NavBarSection */}
+      <Navbar />
       <Routes>
         <Route path='/' element={<HomePage />}/>
         <Route path='/bill-page-section' element={<BillPageSection/>}/>
+        <Route path='/features' element={<Features />}/>
+        <Route path='/about' element={<AboutUs />}/>
       </Routes>
+      {/* Footer Section */}
+      <Footer />
     </BrowserRouter>
   )
 }
