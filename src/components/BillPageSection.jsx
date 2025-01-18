@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 import { ParticularBillSection } from "./ParticularBillSection";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const BillPageSection = () => {
 
@@ -8,6 +9,13 @@ export const BillPageSection = () => {
     const [creditors, setCreditors] = useState([])
     const [debitors, setDebitors] = useState([])
     const [settlements, setSettlements] = useState([]);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!data?.members || data.members.length === 0) {
+            navigate("/"); // Redirect to the home page
+        }
+    }, [data, navigate]);
 
     const calculateTheExpense = () => {
         const tempCreditors = [];
