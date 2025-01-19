@@ -79,7 +79,8 @@ export const HomePageCenterSection = () => {
             </div>
             <button
             onClick={handleSubmit} 
-            className="bg-green-500 text-white w-full py-2 rounded-md font-bold hover:bg-green-600 transition">
+            disabled={tripName.length > 0 ? false : true}
+            className={tripName.length > 0 ? 'bg-green-500 text-white w-full py-2 rounded-md font-bold hover:bg-green-600 transition' : 'bg-green-300 text-white w-full py-2 rounded-md font-bold transition cursor-not-allowed'}>
                 Go!
             </button>
         </div>
