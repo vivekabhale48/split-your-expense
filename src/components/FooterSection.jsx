@@ -26,7 +26,7 @@ export const Footer = () => {
               <FaInstagram />
             </a>
             <a
-              href="https://linkedin.com/in/vivekabhale48"
+              href="https://x.com/vivek_abhale"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-300 text-2xl"
@@ -34,7 +34,7 @@ export const Footer = () => {
               <FaTwitter />
             </a>
             <a
-              href="https://x.com/vivek_abhale"
+              href="https://linkedin.com/in/vivekabhale48"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-300 text-2xl"
